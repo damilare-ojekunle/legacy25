@@ -258,4 +258,10 @@ function startBudgetTracker(){
             total += Number(items);
         }   
     }
+    
+    if (total > income) {
+        alert( `Your income: ${income}` + "\n" + `Your expenditure: ${total}` + "\n" + "Your total expenses exceed your income. Please review your budget." + "\n" + `You are over budget by: ${total - income}` );
+    } else {
+        alert(`Your total expenses are: ${total}. You have ${income - total} left from your income.`);
+    }
 }
