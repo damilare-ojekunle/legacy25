@@ -221,7 +221,7 @@ function loginSimulation() {
             break;
         } else {
             userFound = false;
-            console.log("Access Granted for user: " + username);
+            console.log("Access Denied: " + username);
             alert("Login failed! Incorrect username or password.");
             break;
         }
@@ -264,4 +264,64 @@ function startBudgetTracker() {
     } else {
         alert(`Your total expenses are: ${total}. You have ${income - total} left from your income.`);
     }
+}
+
+// Excercise 7 Solution
+function startGame(){
+    const number_1 = Math.floor(Math.random() * 10) + 1;
+    const number_2 = Math.floor(Math.random() * 10) + 1;
+    const answer = String(number_1 * number_2);
+    let tries = 3;
+
+    alert(
+        "Welcome to the Multiplication game" + "\n" +
+        "Enter the result of the multiplication of the next prompt" + "\n" +
+        "You have Three (3) tries" + "\n" + 
+        "Goodluck"
+    )
+
+    for (let i=0; i < tries; i++){
+        let attempts = (tries - (i+1));
+
+        const user_answer = prompt(
+        " What is the answer to:" + "\n" + "\n" +
+        `${number_1} X ${number_2}`
+        );
+        
+        if (isNaN(user_answer) || user_answer.trim() === "") {
+            alert("Please enter a valid number.");
+            i--;
+            continue;
+        }
+
+        if (user_answer !== answer) {
+            if (attempts == 0){
+                alert(
+                    "Game Over !!!!" + "\n" + 
+                    `The correct answer was ${answer}` + "\n" +
+                    "Lets play again, Click Start Game"
+                )
+                break
+            }
+            if ((attempts == 3) || (attempts == 2))
+            alert(
+                "Wrong Answer, Try again" + "\n" +
+                `Attempts left: ${attempts}` 
+            )
+            if (attempts == 1){
+                alert("Wrong Answer, Last Attempt")
+            }
+            continue
+        }
+
+        if (user_answer === answer) {
+            alert(
+                "You are correct, Welldone !!" + "\n" +
+                `Attempts: ${i+1}` + "\n" +
+                "Lets Play again !!"
+                )
+            break
+        }
+    }
+    
 }
