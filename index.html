@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JavaScript Fundamentals Practice</title>
+
+    <!-- TAILWIND CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -21,14 +24,10 @@
       button {
         padding: 0.5rem 1rem;
         margin-top: 1rem;
-        background: #007bff;
         color: white;
         border: none;
         border-radius: 4px;
         cursor: pointer;
-      }
-      button:hover {
-        background: #0056b3;
       }
       #output {
         margin-top: 1.5rem;
@@ -38,10 +37,54 @@
   </head>
   <body>
     <div class="container">
-      <h1>JavaScript Exercise</h1>
+      <h1 class="text-2xl">JavaScript Exercise</h1>
       <div id="exercise">
         <!-- Add specific UI for each exercise here -->
-      </div>
+         <section>
+            <h2 class="text-lg mt-8">Exercise 1</h2>
+            <p class="mt-3 text-md">Click the start button to attempt the quiz</p>
+            <button onclick="quizFunction()" class="p-3 bg-blue-500">Start Quiz</button>
+            <p id="score1" class="my-4 font-bold text-2xl"></p>
+          </section>
+          <section>
+            <h2 class="text-lg mt-8">Exercise 2</h2>
+            <button onclick="exercise2()" class="p-3 bg-blue-500">Guess a Number</button>
+            <p id="notaN" class="text-red-600 opacity-0 py-2">NaN</p>
+            <p id="Attempts" class="my-4 font-bold text-2xl"></p>
+          </section>
+          <section>
+            <h2 class="text-lg mt-8">Exercise 3</h2>
+            <!-- <button class="p-3 bg-blue-500" id="addTask">Start Todo App</button> -->
+            <div id="task" class="my-5">
+            </div>
+            <button class="p-3 bg-green-500" onclick="addTask()" id="addTask">Add Task</button>
+            <button class="p-3 bg-red-500" onclick="deleteTask()" id="deleteTask">Delete Task</button>
+         </section>
+          <section>
+            <h2 class="text-lg mt-8">Exercise 4</h2>
+            <div id="task" class="my-5">
+            </div>
+            <button class="p-3 bg-green-500" onclick="calculateTip()" id="calculateTip">Calculate Tip</button>
+         </section>
+          <section>
+            <h2 class="text-lg mt-8">Exercise 5</h2>
+            <div id="task" class="my-5">
+            </div>
+            <button class="p-3 bg-green-500" onclick="login()" id="login">Login</button>
+         </section>
+         <section>
+           <h2 class="text-lg mt-8">Exercise 6</h2>
+           <div id="task" class="my-5">
+           </div>
+           <button class="p-3 bg-green-500" onclick="userBudget()" id="userBudget">Start Budget App</button>
+        </section>
+         <section>
+           <h2 class="text-lg mt-8">Exercise 7</h2>
+           <div id="task" class="my-5">
+           </div>
+           <button class="p-3 bg-green-500" onclick="childGame()" id="userBudget">Start Child Multiplication Game</button>
+        </section>
+        </div>
       <div id="output"></div>
     </div>
     <script src="index.js">
