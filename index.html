@@ -4,7 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JavaScript Fundamentals Practice</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
+      section {
+        border: 1px solid grey;
+        border-radius: 20px;
+        transition: .3s ease-in-out;
+        box-shadow: 0 8px 6px rgba(0, 0, 0, 0.1);
+        margin-top: 30px;
+        margin-bottom: 30px;
+        text-align: center;
+        padding: 20px;
+      }
+      section:hover{
+        transform: scale(1.1);
+      }
+      #section3 {
+        border: 1px solid grey;
+        border-radius: 20px;
+        transition: .3s ease-in-out;
+        box-shadow: 0 8px 6px rgba(0, 0, 0, 0.1);
+        margin-top: 5px;
+        margin-bottom: 80px;
+        text-align: center;
+        padding: 20px;
+      }
       body {
         font-family: Arial, sans-serif;
         padding: 2rem;
@@ -38,9 +62,48 @@
   </head>
   <body>
     <div class="container">
-      <h1>JavaScript Exercise</h1>
+      <h1 class="text-2xl">JavaScript Exercises</h1>
       <div id="exercise">
         <!-- Add specific UI for each exercise here -->
+        <section>
+          <h2 class="text-2xl mt-7">Exercise 1</h2>
+          <p class="mt-5">Click the button to attempt the quiz</p>
+          <button onclick="quizFunction()" class="btn1">Start Quiz</button>
+          <p id="score1" class="mt-4 font-bold text-2xl"></p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl mt-7">Exercise 2</h2>
+          <button onclick="exercise2()">Guess a Number</button>
+          <p id="noTag" class="text-red-600 opacity-0 py-2">NaN</p>
+          <p id="attemptTag"></p>
+        </section>
+
+        <section id="section3">
+          <h2 class="text-2xl mt-1">Exercise 3</h2>
+          <button onclick="AddTask()">Add Task</button>
+          <button onclick="DeleteTask()">Delete Task</button>
+          <p id="userTask"></p>
+        </section>
+        <section>
+          <h2 class="text-2xl mt-7">Exercise 4</h2>
+          <div id="task"></div>
+          <button onclick="userCalc()" id="userCalc">Calculator</button>
+        </section>
+        <section>
+          <h2 class="text-2xl mt-7">Exercise 5</h2>
+          <button class="userLogin" onclick="userLogin()">Login</button>
+        </section>
+        <section>
+          <h2 class="text-2xl mt-7">Exercise 6</h2>
+          <button class="userbudget" onclick="userbudget()">
+            Budget Tracker
+          </button>
+        </section>
+        <section>
+          <h2 class="text-2xl mt-7">Exercise 7</h2>
+          <button onclick="startQuiz()">Start Multiplication Quiz</button>
+        </section>
       </div>
       <div id="output"></div>
     </div>
