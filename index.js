@@ -152,7 +152,7 @@ function loadGuess(){
             }
         } while(choice!="5");
     };
-    // main();
+    main();
 
 
     // bill-tip calculator
@@ -188,12 +188,12 @@ function loadGuess(){
         totalBill= bill + tipValue;
         alert(`${Name}, \n Totalbill is: ${totalBill}`);
         console.log(`${Name}, \n Totalbill is:${totalBill}`);
-        result = document.getElementById("calcdisplay");
-        result.innerHTML = Name + ", your total bill is " + totalBill;                                                                                                                                                                                                                                                                                                                                                             your bill is: " + totalBill;
+        let result = document.getElementById("calcdisplay");
+        result.innerHTML = Name + ", your total bill is " + totalBill;                                                                                                                                                                                                                                                                                                                                                            
 
     }
 
-        'use strict'
+    
     function siteAccess(){
         let userDetails=[
             {username:"israelite" , answer:"power17"},
