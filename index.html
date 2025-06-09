@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="media.css">
     <title>JavaScript Fundamentals Practice</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -18,187 +18,119 @@
         padding: 2rem;
         border-radius: 8px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        justify-content: center;
+       
+      }
+      #container{
+         display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap: 19px;
+      }
+      #exercise{
+        border: 2px ridge #443810;
+        border-radius: 18px;
+        padding: 30px;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      }
+      #exercise:hover{
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        /* animation:hover1 10s alternate 1s 1 normal cubic-bezier(0.165, 0.84, 0.44, 1) ; */
+        
+      }
+      button {
+        padding: 0.5rem 1rem;
+        margin-top: 1rem;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+      button:hover {
+        background: #0056b3;
+      }
+      #button{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        gap: 20px;
+      }
+      #output {
+        margin-top: 1.5rem;
+        font-weight: bold;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1 class="text-3xl font-bold text-center mb-7">JavaScript Exercise</h1>
+      <h1>JavaScript Exercise</h1>
+      <div id="container">
       <div id="exercise">
         <!-- Add specific UI for each exercise here -->
-
-        <!-- Excercise 1 -->
-        <div class="flex flex-col bg-blue-200/50 p-6 rounded-lg shadow-lg mb-6 w-full max-w-3xl mx-auto">
-          <h2 class="text-2xl sm:text-3xl font-semibold mb-4 text-center sm:text-left">Exercise 1</h2>
-          <p class="text-base sm:text-lg text-center sm:text-left">
-            Hi there !!! Click the button below to start the quiz. You have three questions to answer. Good luck!
-          </p>
-
-          <div class="flex flex-col sm:flex-row items-center justify-center sm:gap-25 gap-4 sm:gap-10 mt-6 mb-4">
-            <button
-              id="startQuiz"
-              class="w-full sm:w-auto bg-blue-700 rounded-md text-lg text-white py-2 px-4 hover:bg-blue-600"
-              onclick="quiz()"
-            >
-              Start Quiz
-            </button>
-            <button
-              id="clearOutput"
-              class="w-full sm:w-auto bg-red-500 rounded-md text-white hover:bg-red-600 text-lg py-2 px-4"
-              onclick="clearOutput()"
-            >
-              Clear Score
-            </button>
-          </div>
-
-          <div id="excercise1Output" class="mt-4 mb-4 font-semibold text-xl sm:text-2xl text-center">
-            Your Score:
-          </div>
-        </div>
-
-        <!-- Excercise 2 -->
-        <div class="flex flex-col bg-green-300/50 p-6 rounded-lg shadow-lg mb-6 w-full max-w-3xl mx-auto">
-          <h2 class="text-2xl sm:text-3xl font-semibold mb-4 text-center sm:text-left">Exercise 2</h2>
-          <p class="text-base sm:text-lg text-center sm:text-left">
-             Click the Button to start the Guesing Game,
-             Here you'd have unlimited tries to guess a number from 1 till 10, 
-             see if you can guess the right one as fast as possible.
-             Goodluck again...... you'd need it !!!
-          </p>
-
-          <div class="mt-6 justify-center flex flex-col sm:flex-row items-center sm:gap-25 gap-4 sm:gap-10">
-            <button 
-              class="w-full sm:w-auto bg-green-700 rounded-md text-lg text-white py-2 px-4 hover:bg-green-600" 
-              id="startGuessingGame"
-              onclick="startGuessingGame()"
-            >
-              Start Game
-            </button>
-
-            <button
-              id="clearOutput"
-              class="w-full sm:w-auto bg-red-500 rounded-md text-white hover:bg-red-600 text-lg py-2 px-4"
-              onclick="clearOutput2()"
-            >
-              Clear 
-            </button>
-          </div>
-
-          <div 
-            id="GuessingGameOutput" 
-            class="mt-6 mb-4 font-semibold text-xl sm:text-2xl text-center"
-          >
-            Attempts: 
-          </div>
-        </div>
-
-        <!-- Excercise 3 -->
-        <div class="flex flex-col bg-amber-500/20 p-6 rounded-lg shadow-lg mb-6 w-full max-w-3xl mx-auto">
-          <h2 class="text-2xl sm:text-3xl font-semibold mb-4 text-center sm:text-left">Exercise 3</h2> 
-          <p class="text-base sm:text-lg text-center sm:text-left">
-            Welcome to the Todo list mini App, manage your tasks in the console.
-          </p>
-          <!-- Todo list section -->
-          <div class="mt-6 mb-4">
-            <p class="font-semibold text-xl sm:text-2xl text-center">Add and Delete your tasks here</p>
-
-            <!-- Todo Display -->
-            <!-- <div>
-              <ul 
-                id="todoList" 
-                class="list-inside mt-4 bg-white p-2 rounded-lg"
-              >
-                <li class="text-gray-700">No tasks in your todo list</li>
-              </ul>
-            </div> -->
-
-
-            <div class="mt-4 flex w-full flex-col gap-4 items-center justify-center">
-              <button
-                id="addTodoButton"
-                class="bg-blue-700 w-full text-white text-lg py-2 px-4 rounded-md hover:bg-blue-600"
-                onclick="addTask()"
-              >
-                Add Task
-              </button>
-              <button
-                class="bg-red-500 w-full text-white text-lg py-2 px-4 rounded-md hover:bg-red-600"
-                onclick="deleteTask()"
-              >
-                Delete Task
-              </button>
-
-              <button
-                class="bg-green-700 w-full text-white text-lg py-2 px-4 rounded-md hover:bg-green-600"
-                onclick="displayTasks()"
-              >
-                Display Tasks
-              </button>
-
-              <button
-                class="bg-red-500 w-full text-white text-lg py-2 px-4 rounded-md hover:bg-red-600"
-                onclick="ClearTodo()"
-              >
-               Clear Todo List
-              </button>
-            </div>
-          </div>
-
-
-        </div>
-
-        <!-- Excercise 4 --> 
-        <div class="flex flex-col bg-purple-700/30 p-6 rounded-lg shadow-lg mb-6 w-full max-w-3xl mx-auto">
-          <h2 class="text-2xl sm:text-3xl font-semibold mb-4 text-center sm:text-left">Exercise 4</h2> 
-          <p class="text-base sm:text-lg text-center sm:text-left">
-            Welcome to the Tip Calculator, Click the button below to start, just follow the prompts
-          </p>
-
-          <div class="mt-5">
-            <button 
-              class=" bg-blue-700 w-full text-white text-lg py-2 px-4 rounded-md hover:bg-blue-600"
-              onclick="startTip()"
-            >
-              Start Calculator
-            </button>
-          </div>
-
-        </div>
-
-        <!-- Excercise 5 -->
-        <div class="flex flex-col bg-slate-400/40 p-6 rounded-lg shadow-lg mb-6 w-full max-w-3xl mx-auto">
-          <h2 class="text-2xl sm:text-3xl font-semibold mb-4 text-center sm:text-left">Exercise 5</h2> 
-          <p class="text-base sm:text-lg text-center sm:text-left">
-            Welcome to the Login Simulation mini app, Login based off the credentials in the console.
-          </p>
-
-          <div class="mt-5">
-            <button 
-              class=" bg-white w-full text-black font-bold border border-grey-300 text-lg py-2 px-4 rounded-md hover:bg-blue-600 hover:border-none hover:text-white"
-              onclick="loginSimulation()"
-            >
-              Start Login Simulation
-            </button>
-        </div>
-        </div>
-
-        <!--Excercise 6 -->
-        <div class="flex flex-col bg-orange-300 p-6 rounded-lg shadow-lg mb-6 w-full max-w-3xl mx-auto">
-          <h2 class="text-2xl sm:text-3xl font-semibold mb-4 text-center sm:text-left">Exercise 6</h2> 
-          <p class="text-base sm:text-lg text-center sm:text-left">
-            Welcome to the Mini Budget Tracker, please follow the prompts.
-          </p>
-
-          <button>
-            <button 
-              class="mt-6 bg-green-800 w-full text-white text-lg py-2 px-4 rounded-md hover:bg-green-700"
-              onclick="startBudgetTracker()"
-            >
-              Start Budget Tracker
-            </button>
-          </button>
-        </div>
-
+         <h2>
+          Interactive Quiz App
+         </h2>
+         <p>
+          Welcome to our live interactive quiz app. <br>
+          click on the button below to start your quiz section
+         </p>
+         <button onclick="loadQuiz()">start quiz</button>
+      </div>
+      <div id="exercise">
+        <!-- Add specific UI for each exercise here -->
+         <h2>
+          Number's Guessing game App
+         </h2>
+         <p>
+          Welcome to our Number's Guessing app. <br>
+          click on the button below to start the game
+         </p>
+         <button onclick="loadGuess()">Guess a number</button>
+         <button onclick="clearOutput2()">clear game</button>
+         <div id="GuessingGameOutput"></div>
+      </div>
+      <div id="exercise">
+        <!-- Add specific UI for each exercise here -->
+         <h2>
+          To-Do list App
+         </h2>
+         <p>
+          Welcome to our latest To-Do list  app. <br>
+          click on the button below to create your to do list
+         </p>
+         <div id="button">
+         <button onclick="create_list()">create list</button>
+         <button onclick="del_list()">delete from list</button>
+         <button onclick="add_list()">replace a list</button>
+         <button onclick="view_list()">view list</button>
+         </div>
+      </div>
+      <div id="exercise">
+        <!-- Add specific UI for each exercise here -->
+         <h2>
+          Bill-Tip calculator App
+         </h2>
+         <p>
+          To use this app. <br>
+          click on the button "use the calculator".
+         </p>
+         <button onclick="calc()">use the calculator</button>
+         <div id="calcdisplay"></div>
+      </div>
+      <div id="exercise">
+        <!-- Add specific UI for each exercise here -->
+         <h2>
+          Login simulator App
+         </h2>
+         <p>
+          To use this app. <br>
+          click on the button below to simulate login.
+         </p>
+         <button onclick="siteAccess()">login simulator</button>
+      </div>
+      <div id="output"></div>
+      </div>
     </div>
     <script src="index.js">
       // Write your JavaScript here
