@@ -1,261 +1,167 @@
-const { use } = require("react");
+  // --- Section 1---
+  function startQuiz() {
+    alert("Welcome to the Interactive Quiz App!");
 
-// Excercise one Solution
-function clearOutput() {
-    result = document.getElementById("excercise1Output");
-    if (result.innerHTML === "Your Score: ") {
-        alert("Your score is already clear.");
-        return;
-    }else{
-        document.getElementById("excercise1Output").innerHTML = "Your Score: ";
-    }
-    
-}
+    const questions = [
+       { question: "who is the current president of the US?", answer: "Joe Biden" },
+       { question: "What is 2 + 2?", answer: "4" },
+       { question: "Which planet is known as the Red Planet?", answer: "Mars" },
+       { question: "What is the largest ocean on Earth?", answer: "Pacific Ocean" },
+       { question: "who is the first man on the moon?", answer: "Neil Armstrong" },
+        { question: "What is the capital of France?", answer: "Paris" },
+        { question: "What is the chemical symbol for water?", answer: "H2O" },
+        { question: "Who wrote 'The lion and the jewel'?", answer: "Wole Soyinka" },
+        { question: "What is the largest mammal?", answer: "Blue Whale" },
+        { question: "What is the main ingredient in jollof rice?", answer: "Rice" }
+    ];
 
-function quiz(){
-    Questions = ["what is the capital of France?", "what is 2+2?", "what is the capital of Japan?"];
-    Answers = ["Paris", "4", "Tokyo"];
-    Score = 0;
-    for (let i = 0; i < Questions.length; i++) {
-        let userAnswer = prompt(Questions[i]);
-        if (userAnswer === ""){
-            alert("Please answer the question.");
-            i--; 
-            continue; 
-        }
-        if (userAnswer.toLowerCase() === Answers[i].toLowerCase()) {
-            Score++;
-            alert("Correct!");
+    let score = 0;
+    const totalQuestions = questions.length;
+
+    for (let i = 0; i < totalQuestions; i++) {
+        const q = questions[i];
+
+        let userAnswer = prompt(`${q.question}`); 
+
+       
+        if (userAnswer === null) {
+            alert("You cancelled this question.");
+            
         } else {
-            alert("Incorrect! The correct answer is " + Answers[i]);
+            const inputOrDefault = userAnswer.trim() || 'NO_ANSWER'; // Provides a default if input is empty or just whitespace
+
+            if (inputOrDefault === 'NO_ANSWER') { // Covers empty string after trim
+                alert("You skipped this question.");
+                // Score doesn't change
+            } else if (inputOrDefault.toLowerCase() === q.answer.toLowerCase()) {
+                alert("Correct!");
+                score++;
+            } else {
+                alert(`Incorrect. The correct answer was: ${q.answer}`);
+            }
         }
     }
-    result = document.getElementById("excercise1Output");
-    result.innerHTML = "Your score is: " + Score + "/" + Questions.length;
+
+    alert(` Quiz Finished \nYou got ${score} out of ${totalQuestions} questions correct.`);
 }
 
+// Section 2
+"use strict"; 
+    function startGame() {
+    alert("Welcome to the Number Guessing Game!");
+    alert("I'm thinking of a number between 1 and 100.");
 
+    const secretNumber = Math.floor(Math.random() * 100) + 1;
 
-//Excercise two Solution
-function clearOutput2() {
-    result = document.getElementById("GuessingGameOutput");
-    if (result.innerHTML === "Attempts: ") {
-        alert("The guessing game output is already clear.");
-        return;
-    } else {
-        document.getElementById("GuessingGameOutput").innerHTML = "Attempts: ";
-    }
-}
-function startGuessingGame(){
-    console.log("Starting the guessing game...");
-    let randomNumber = Math.floor(Math.random() * 10) + 1;
-    console.log("Random number is: " + randomNumber); 
     let attempts = 0;
+    let guess = null;
 
-    while (true) {
-        input = prompt("Guess a number between 1 and 10:");
-        input = Number(input);
-        if (input === null) {
-            alert("Game Cancelled");
+    while (guess !== secretNumber) {
+        attempts++;
+
+        const userInput = prompt(`Attempt ${attempts}: Guess the number (1-100):`);
+
+        if (userInput === null) {
+            alert("Game cancelled!");
             return;
         }
-        if (typeof input !== 'number' || input < 1 || input > 10) {
-            alert("Please enter a valid number between 1 and 10.");
-            continue;
-        }
-        if (input === randomNumber) {
-            attempts++;
-            alert("Congratulations! You guessed the number correctly");
-            break;
-        }
-        if (input < randomNumber) {
+
+        guess = Number(userInput);
+
+        if (isNaN(guess) || guess < 1 || guess > 100) {
+            alert("Please enter a number between 1 and 100.");
+            attempts--; 
+        } else if (guess < secretNumber) {
             alert("Too low! Try again.");
-        }
-        if (input > randomNumber) {
+        } else if (guess > secretNumber) {
             alert("Too high! Try again.");
-        }
-        if (input !== randomNumber) {
-            attempts++;
-        }
-    }
-
-    result = document.getElementById("GuessingGameOutput");
-    result.innerHTML = "Attempts: " + attempts + "<br>Random Number: " + randomNumber;
-}
-
-// Excercise three Solution
-let todo = []; 
-
-addTask = () => {
-    let task = prompt("Enter a task:").toLocaleLowerCase();
-    if (task === null) {
-        alert("Task input cancelled.");
-        return;
-    }
-    if (task.trim() === "") {
-        alert("Please enter a task.");
-        return;
-    }
-    if (todo.includes(task)) {
-        alert("This task already exists in your todo list.");
-        return;
-    }
-
-    todo.push(task);
-    console.log("Task added: " + task);
-    console.log("Your Todolist items: " + todo.join(", "));
-}
-
-deleteTask = () =>{
-    let tasktodelete = prompt("Enter the task you want to delete:").toLocaleLowerCase();
-    if (tasktodelete === null) {
-        alert("Task deletion cancelled.");
-        return;
-    }
-    if (tasktodelete.trim() === "") {
-        alert("Please enter a task to delete.");
-        return;
-    }
-    if (!todo.includes(tasktodelete)) {
-        alert("This task does not exist in your todo list.");
-        return;
-    }
-    const indexofitem = todo.indexOf(tasktodelete);
-    todo.splice(indexofitem, 1);
-    alert(`Task "${tasktodelete}" removed.`);
-    console.log("Updated Todolist:", todo);
-}
-
-displayTasks = () => {
-    if (todo.length === 0) {
-        alert("Your todo list is empty.");
-        console.log("Todo list is empty.");
-        return;
-    }
-    let taskList = "Your Todo List:\n";
-    todo.forEach((task, index) => {
-        taskList += `${index + 1}. ${task}\n`;
-    });
-    alert(taskList);
-    console.log("Your Todo list:", todo.toString());
-}
-
-ClearTodo = () =>{
-    if (todo.length === 0) {
-        console.log("Todo list is empty.");
-        alert("Your todo list is already empty.");
-        return;
-    }
-    todo.length = 0; 
-    alert("Your todo list has been cleared.");
-    console.log("Todo list cleared.");
-}
-
-//Excercise 4 Solution
-function startTip(){
-    bill = prompt("Enter your bill amount");
-    if (isNaN(bill) || bill.trim() === "") {
-        console.log("Enter a valid number")
-        alert("Enter a valid number")
-        return
-    }
-    tippercentage = prompt("Enter Tip Percentage (0 - 100%)")
-    if (isNaN(tippercentage) || tippercentage.trim() === "") {
-        console.log("Enter a valid number")
-        alert("Enter a valid number")
-        return
-    }
-    
-    newbill = Number(bill);
-    tip = Number(tippercentage);
-    if (tip > 100){
-        alert("Tip value Exceeded");
-        return
-    }
-
-    tip_amount = (tip * 0.01) * newbill;
-    total_amount = newbill + tip_amount;
-    alert("Tip amount is: " + tip_amount + "\n" + "Your Total amount is: " + total_amount);
-}
-
-// Excercise 5 solution
-function loginSimulation(){
-    credentials = [
-        user1 = {
-            username: "user1",
-            password: "password1"
-        },
-        user2 = {
-            username: "user2",
-            password: "password2"
-        },
-        user3 = {
-            username: "user3",
-            password: "password3"
-        },
-        user4 = {
-            username: "user4",
-            password: "password4"
-        }
-    ]
-
-    console.log("Login info" + credentials);
-        
-    username = prompt("Enter your username:");
-    password = prompt("Enter your password:");
-
-    if (username === null || password === null) {
-        alert("Login cancelled.");
-        return;
-    }
-
-    if (username.trim() === "" || password.trim() === "") {
-        alert("Please enter both username and password.");
-        return;
-    }
-
-    let userFound = false;
-    for (let i = 0; i < credentials.length; i++){
-        if (credentials[i].username === username && credentials[i].password === password) {
-            userFound = true;
-            alert("Access Granted! Welcome " + username + "!");
-            console.log("Access Granted for user: " + username);
-            break;
-        }
-        else{
-            userFound = false;
-            console.log("Access Granted for user: " + username);
-            alert("Login failed! Incorrect username or password.");
-            break;
-        }
-    }
-}
-
-//Excercise 6 Solutions
-function startBudgetTracker(){
-    income = prompt("Enter your monthly income:");
-    if (isNaN(income) || income.trim() === "") {
-        alert("Please enter a valid income amount.");
-        return;
-    }
-
-    items_number = prompt("How many items do you want to add to your budget tracker?");
-    if (isNaN(items_number) || items_number <= 0) {
-        alert("Please enter a valid number of items.");
-        return;
-    }
-
-    for (let i=0; i < items_number; i++){
-        items = prompt(`Enter your Item ${i+1} Price: `);
-        if (isNaN(items) || items.trim() === "") {
-            alert("Please enter a valid item price.");
-            i--; 
-            continue;
-        }
-        if (i === 0) {
-            total = Number(items);
         } else {
-            total += Number(items);
-        }   
+            alert(`Congratulations! You guessed the number ${secretNumber} `);
+            alert(`It took you ${attempts} attempts.`);
+        }
     }
 }
+
+
+// Section 3
+"use strict";
+function runList() {
+    const tasks = [];
+
+    const viewTasks = () => {
+        console.log("--- Your To-Do List ---");
+        if (tasks.length === 0) {
+            console.log("No tasks yet!");
+        } else {
+            tasks.forEach((task, index) => {
+                console.log(`${index + 1}. ${task}`);
+            });
+        }
+        console.log("-----------------------");
+    };
+
+    const addTask = (taskDescription) => {
+        if (taskDescription) {
+            tasks.push(taskDescription);
+            console.log(`Added: "${taskDescription}"`);
+        } else {
+            console.log("Task description cannot be empty.");
+        }
+    };
+
+    const deleteTask = (taskIndex) => {
+        if (taskIndex >= 0 && taskIndex < tasks.length) {
+            const deletedTask = tasks.splice(taskIndex, 1);
+            console.log(`Deleted: "${deletedTask[0]}"`);
+        } else {
+            console.log("Invalid task number.");
+        }
+    };
+
+    alert("Running To-Do List in the Console! Please open your developer console (F12).");
+    while (true) {
+        const action = prompt("What would you like to do? (add, view, delete, exit)").toLowerCase().trim();
+
+        if (action === 'view') {
+            viewTasks();
+        } else if (action === 'add') {
+            const newTask = prompt("Enter the new task description:");
+            if (newTask !== null && newTask.trim() !== '') {
+                 addTask(newTask.trim());
+            } else if (newTask !== null) { 
+                console.log("Task description cannot be empty.");
+            } else { 
+                 console.log("Add task cancelled.");
+            }
+
+        } else if (action === 'delete') {
+            viewTasks();
+            if (tasks.length > 0) {
+                const indexInput = prompt("Enter the number of the task to delete:");
+                 if (indexInput !== null && indexInput.trim() !== '') {
+                    const indexToDelete = Number(indexInput) - 1;
+                    deleteTask(indexToDelete);
+                 } else if (indexInput !== null) { 
+                    console.log("Please enter a task number.");
+                 } else { 
+                    console.log("Delete task cancelled.");
+                 }
+            } else {
+                console.log("No tasks to delete.");
+            }
+
+
+        } else if (action === 'exit') {
+            console.log("Exiting To-Do List. Goodbye!");
+            break;
+
+        } else if (action !== null) { 
+            console.log("Invalid action. Please type 'add', 'view', 'delete', or 'exit'.");
+        } else { 
+             console.log("Exiting To-Do List. Goodbye!");
+             break;
+        }
+    }
+}
+
+``
