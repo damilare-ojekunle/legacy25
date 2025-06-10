@@ -1,89 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JavaScript Fundamentals Practice</title>
+    <title>JavaScript Practice</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        padding: 2rem;
-        background: #f0f2f5;
-      }
-      .container {
-        max-width: 600px;
-        margin: auto;
-        background: white;
-        padding: 2rem;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        display: grid;
-      }
-      button {
-        padding: 0.5rem 1rem;
-        margin-top: 1rem;
-        background: #007bff;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        position: relative;
-      }
-      button:hover {
-        background: #0056b3;
-      }
-      #output {
-        margin-top: 1.5rem;
-        font-weight: bold;
-      }
-      .quiz{
-        grid-column: span 2;
-        text-align: center;
-        background-color: aqua;
-      }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family:'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 10px 300px;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            color: #1f2937;
+            margin-bottom: 2rem;
+        }
+
+        .main-container {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .container-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        .container-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .container-subtitle {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            /* gap handled by margin-bottom on card */
+        }
+
+        .card {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: border-bottom-color 0.3s ease;
+            text-align: center; /* Center text content within the card */
+        }
+
+        .card:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center flex items (icon and title) */
+            margin-bottom: 1rem;
+            /* Removed margin-right as it's now centered */
+            /* margin-right: 1rem; */
+        }
+
+        .icon-container {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem; /* Keep margin right on icon to space from title */
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .card-description {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            /* text-align: center; already inherited from .card */
+        }
+
+        .btn {
+            width: 100%; /* Keep buttons full width */
+            padding: 0.75rem 1rem;
+            color: white;
+            font-weight: 500;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            font-size: 1rem;
+            /* Buttons are block elements, 100% width, no need for margin: auto */
+        }
+
+
+        .btn-blue { background-color: #3b82f6; }
+        .btn-green { background-color: #10b981; }
+        .btn-purple { background-color: #8b5cf6; }
+        .btn-yellow { background-color: #f59e0b; }
+        .btn-red { background-color: #ef4444; }
+        .btn-indigo { background-color: #6366f1; }
+        .btn-pink { background-color: #ec4899; }
+
+        @media screen and (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            .container {
+                margin: 10px 20px; /* Adjusted for smaller screens */
+            }
+        }
     </style>
-  </head>
-  <body>
-  <div class="container">
-    <div class="Quiz">
-      <h1>Questionnaire</h1>
-      <div id="exercise">
-        <!-- Add specific UI for each exercise here -->
-        <p>Click the button below to run the Quiz.</p>
-        <button onclick="startQuiz()" >Questionnaire</button>  
-      </div>
-      <div id="output"></div>
+</head>
+<body>
+    <div class="container">
+
+        <div class="main-container">
+            <div class="container-header">
+                <h2 class="container-title">Interactive Learning Modules</h2>
+            </div>
+
+            <!-- <div class="cards-grid"> -->
+
+                <!-- Task 1: Quiz -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon-container icon-blue">
+                             <!-- SVG REMOVED -->
+                        </div>
+                        <h3 class="card-title">Interactive Quiz</h3>
+                    </div>
+                    <p class="card-description">Test your knowledge with our interactive questionnaire covering various topics.</p>
+                    <button onclick="startQuiz()" class="btn btn-blue">
+                        Start Quiz
+                    </button>
+                </div>
+
+                <!-- Task 2: Number Guessing Game -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon-container icon-green">
+                             <!-- SVG REMOVED -->
+                        </div>
+                        <h3 class="card-title">Number Guessing Game</h3>
+                    </div>
+                    <p class="card-description">Can you guess the secret number between 1 and 100? Test your luck and logic!</p>
+                    <button onclick="startGame()" class="btn btn-green">
+                        Start Game
+                    </button>
+                </div>
+
+                <!-- Task 3: To-Do List -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon-container icon-purple">
+                             <!-- SVG REMOVED -->
+                        </div>
+                        <h3 class="card-title">To-Do List</h3>
+                    </div>
+                    <p class="card-description">Manage your tasks with a simple to-do list application using console interaction.</p>
+                    <button onclick="runList()" class="btn btn-purple">
+                        Open To-Do List
+                    </button>
+                </div>
+
+                <!-- Task 4: Tip Calculator -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon-container icon-yellow">
+                            <!-- SVG REMOVED -->
+                        </div>
+                        <h3 class="card-title">Tip Calculator</h3>
+                    </div>
+                    <p class="card-description">Calculate tips and total bill amounts easily with this handy calculator tool.</p>
+                    <button onclick="runCalculator()" class="btn btn-yellow">
+                        Calculate Tip
+                    </button>
+                </div>
+
+                <!-- Task 5: Login Simulation -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon-container icon-red">
+                            <!-- SVG REMOVED -->
+                        </div>
+                        <h3 class="card-title">Login Simulation</h3>
+                    </div>
+                    <p class="card-description">Try logging in with predefined user credentials and see authentication in action.</p>
+                    <button onclick="LoginSimulation()" class="btn btn-red">
+                        Try Login
+                    </button>
+                </div>
+
+                <!-- Task 6: Budget Tracker -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon-container icon-indigo">
+                            <!-- SVG REMOVED -->
+                        </div>
+                        <h3 class="card-title">Budget Tracker</h3>
+                    </div>
+                    <p class="card-description">Track your income and expenses to manage your budget effectively and stay on top of finances.</p>
+                    <button onclick="BudgetTracker()" class="btn btn-indigo">
+                        Track Budget
+                    </button>
+                </div>
+
+                <!-- Task 7: Multiplication Game -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon-container icon-pink">
+                            <!-- SVG REMOVED -->
+                        </div>
+                        <h3 class="card-title">Multiplication Game</h3>
+                    </div>
+                    <p class="card-description">Practice multiplication with this fun and educational game designed for kids and learners.</p>
+                    <button onclick="MultiplicationGame()" class="btn btn-pink">
+                        Start Game
+                    </button>
+                </div>
+
+            </div>
+        </div>
     </div>
-
-    <!-- Project number 2  -->
-     <div class="RandomGuess">
-      <h1>Random Guess</h1>
-      <div id="exercise">
-        <!-- Add specific UI for each exercise here -->
-        <p>Guess the number.</p>
-        <button onclick="startGame()" >Start</button>  
-      </div>
-      <div id="output"></div>
-    </div>
-
-    <!-- Project number 3 -->
-     <div class="ToDo">
-      <h1>To-Do List</h1>
-      <div id="exercise">
-        <!-- Add specific UI for each exercise here -->
-        <p>Create a to-do-list.</p>
-        <button onclick="runList()" >Create</button>  
-      </div>
-      <div id="output"></div>
-    </div>
-
-    <!-- Project number 4 -->
-     <div class="TipCalculator">
-
-
-
-
-  </div>
 
     <script src="index.js">
       // Write your JavaScript here
