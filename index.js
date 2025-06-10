@@ -13,8 +13,8 @@ function clearOutput() {
 }
 
 function quiz(){
-    Questions = ["what is the capital of France?", "what is 2+2?", "what is the capital of Japan?"];
-    Answers = ["Paris", "4", "Tokyo"];
+    Questions = ["what is the capital of Nigeria?", "what is 3+2?", "what is the capital of Ogun state?"];
+    Answers = ["Abuja", "5", "Abeokuta"];
     Score = 0;
     for (let i = 0; i < Questions.length; i++) {
         let userAnswer = prompt(Questions[i]);
@@ -182,20 +182,20 @@ function startTip(){
 function loginSimulation(){
     credentials = [
         user1 = {
-            username: "user1",
-            password: "password1"
+            username: "Israel",
+            password: "001"
         },
         user2 = {
-            username: "user2",
-            password: "password2"
+            username: "ALex",
+            password: "002"
         },
         user3 = {
-            username: "user3",
-            password: "password3"
+            username: "Tobi",
+            password: "003"
         },
         user4 = {
-            username: "user4",
-            password: "password4"
+            username: "Chuka",
+            password: "004"
         }
     ]
 
