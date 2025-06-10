@@ -1,261 +1,336 @@
-const { use } = require("react");
+   // --- Section 1---
+        function startQuiz() {
+            alert("Welcome to the Interactive Quiz App!");
 
-// Excercise one Solution
-function clearOutput() {
-    result = document.getElementById("excercise1Output");
-    if (result.innerHTML === "Your Score: ") {
-        alert("Your score is already clear.");
-        return;
-    }else{
-        document.getElementById("excercise1Output").innerHTML = "Your Score: ";
-    }
-    
-}
+            const questions = [
+               { question: "who is the current president of the US?", answer: "Joe Biden" },
+               { question: "What is 2 + 2?", answer: "4" },
+               { question: "Which planet is known as the Red Planet?", answer: "Mars" },
+               { question: "What is the largest ocean on Earth?", answer: "Pacific Ocean" },
+               { question: "who is the first man on the moon?", answer: "Neil Armstrong" },
+                { question: "What is the capital of France?", answer: "Paris" },
+                { question: "What is the chemical symbol for water?", answer: "H2O" },
+                { question: "Who wrote 'The lion and the jewel'?", answer: "Wole Soyinka" },
+                { question: "What is the largest mammal?", answer: "Blue Whale" },
+                { question: "What is the main ingredient in jollof rice?", answer: "Rice" }
+            ];
 
-function quiz(){
-    Questions = ["what is the capital of France?", "what is 2+2?", "what is the capital of Japan?"];
-    Answers = ["Paris", "4", "Tokyo"];
-    Score = 0;
-    for (let i = 0; i < Questions.length; i++) {
-        let userAnswer = prompt(Questions[i]);
-        if (userAnswer === ""){
-            alert("Please answer the question.");
-            i--; 
-            continue; 
+            let score = 0;
+            const totalQuestions = questions.length;
+
+            for (let i = 0; i < totalQuestions; i++) {
+                const q = questions[i];
+
+                let userAnswer = prompt(`${q.question}`); 
+
+               
+                if (userAnswer === null) {
+                    alert("You cancelled this question.");
+                    
+                } else {
+                    const inputOrDefault = userAnswer.trim() || 'NO_ANSWER'; // Provides a default if input is empty or just whitespace
+
+                    if (inputOrDefault === 'NO_ANSWER') { // Covers empty string after trim
+                        alert("You skipped this question.");
+                        // Score doesn't change
+                    } else if (inputOrDefault.toLowerCase() === q.answer.toLowerCase()) {
+                        alert("Correct!");
+                        score++;
+                    } else {
+                        alert(`Incorrect. The correct answer was: ${q.answer}`);
+                    }
+                }
+            }
+
+            alert(` Quiz Finished \nYou got ${score} out of ${totalQuestions} questions correct.`);
         }
-        if (userAnswer.toLowerCase() === Answers[i].toLowerCase()) {
-            Score++;
-            alert("Correct!");
-        } else {
-            alert("Incorrect! The correct answer is " + Answers[i]);
+
+// Section 2
+"use strict"; 
+            function startGame() {
+            alert("Welcome to the Number Guessing Game!");
+            alert("I'm thinking of a number between 1 and 100.");
+
+            const secretNumber = Math.floor(Math.random() * 100) + 1;
+
+            let attempts = 0;
+            let guess = null;
+
+            while (guess !== secretNumber) {
+                attempts++;
+
+                const userInput = prompt(`Attempt ${attempts}: Guess the number (1-100):`);
+
+                if (userInput === null) {
+                    alert("Game cancelled!");
+                    return;
+                }
+
+                guess = Number(userInput);
+
+                if (isNaN(guess) || guess < 1 || guess > 100) {
+                    alert("Please enter a number between 1 and 100.");
+                    attempts--; 
+                } else if (guess < secretNumber) {
+                    alert("Too low! Try again.");
+                } else if (guess > secretNumber) {
+                    alert("Too high! Try again.");
+                } else {
+                    alert(`Congratulations! You guessed the number ${secretNumber} `);
+                    alert(`It took you ${attempts} attempts.`);
+                }
+            }
         }
-    }
-    result = document.getElementById("excercise1Output");
-    result.innerHTML = "Your score is: " + Score + "/" + Questions.length;
-}
 
 
+// Section 3
+"use strict";
+function runList() {
+    const tasks = [];
 
-//Excercise two Solution
-function clearOutput2() {
-    result = document.getElementById("GuessingGameOutput");
-    if (result.innerHTML === "Attempts: ") {
-        alert("The guessing game output is already clear.");
-        return;
-    } else {
-        document.getElementById("GuessingGameOutput").innerHTML = "Attempts: ";
-    }
-}
-function startGuessingGame(){
-    console.log("Starting the guessing game...");
-    let randomNumber = Math.floor(Math.random() * 10) + 1;
-    console.log("Random number is: " + randomNumber); 
-    let attempts = 0;
+    const viewTasks = () => {
+       console.log("--- Your To-Do List ---"); 
+       if (tasks.length === 0){ 
+           console.log("No tasks yet!"); 
+           alert("No tasks yet!"); 
+       } else {
+           const taskListString = tasks.map((t, i) => `${i + 1}. ${t}`).join('\n');
+           console.log(taskListString); 
+           alert("--- Your To-Do List ---\n" + taskListString); 
+       }
+       console.log("-----------------------"); 
+    };
+
+    alert("Running To-Do List - Open console (F12)");
 
     while (true) {
-        input = prompt("Guess a number between 1 and 10:");
-        input = Number(input);
-        if (input === null) {
-            alert("Game Cancelled");
-            return;
-        }
-        if (typeof input !== 'number' || input < 1 || input > 10) {
-            alert("Please enter a valid number between 1 and 10.");
-            continue;
-        }
-        if (input === randomNumber) {
-            attempts++;
-            alert("Congratulations! You guessed the number correctly");
+        const action = prompt("What would you like to do? (add/view/delete/exit)")?.toLowerCase().trim();
+
+        if (action === 'view') {
+            viewTasks();
+        } else if (action === 'add') {
+            const newTask = prompt("Enter task description:");
+            if (newTask !== null && newTask.trim() !== '') {
+                tasks.push(newTask.trim());
+                console.log(`Added: "${newTask.trim()}"`);
+            } else if (newTask === null) {
+                 console.log("Add cancelled."); 
+            } else {
+                 console.log("Task description cannot be empty."); 
+            }
+
+        } else if (action === 'delete') {
+            viewTasks(); 
+
+            if (tasks.length === 0) { 
+                console.log("No tasks to delete.");
+                alert("No tasks to delete."); 
+                continue; 
+            }
+
+            const indexInput = prompt("Enter task number to delete:");
+
+            if (indexInput === null) {
+                console.log("Delete cancelled.");
+                alert("Delete cancelled.");
+                continue;             
+            }
+
+            const index = parseInt(indexInput) - 1;
+
+            if (!isNaN(index) && index >= 0 && index < tasks.length) {
+                const deletedTaskArray = tasks.splice(index, 1); 
+                const deletedTaskDescription = deletedTaskArray[0]; 
+                console.log(`Deleted: "${deletedTaskDescription}"`);
+                alert(`Deleted: "${deletedTaskDescription}"`); 
+            } else {
+                console.log("Invalid task number entered.");
+                alert("Invalid task number entered.");
+            }
+
+        } else if (action === 'exit' || action === null) { 
+            console.log("Exiting. Goodbye!");
+            alert('Exiting. Goodbye!');
             break;
-        }
-        if (input < randomNumber) {
-            alert("Too low! Try again.");
-        }
-        if (input > randomNumber) {
-            alert("Too high! Try again.");
-        }
-        if (input !== randomNumber) {
-            attempts++;
-        }
-    }
-
-    result = document.getElementById("GuessingGameOutput");
-    result.innerHTML = "Attempts: " + attempts + "<br>Random Number: " + randomNumber;
-}
-
-// Excercise three Solution
-let todo = []; 
-
-addTask = () => {
-    let task = prompt("Enter a task:").toLocaleLowerCase();
-    if (task === null) {
-        alert("Task input cancelled.");
-        return;
-    }
-    if (task.trim() === "") {
-        alert("Please enter a task.");
-        return;
-    }
-    if (todo.includes(task)) {
-        alert("This task already exists in your todo list.");
-        return;
-    }
-
-    todo.push(task);
-    console.log("Task added: " + task);
-    console.log("Your Todolist items: " + todo.join(", "));
-}
-
-deleteTask = () =>{
-    let tasktodelete = prompt("Enter the task you want to delete:").toLocaleLowerCase();
-    if (tasktodelete === null) {
-        alert("Task deletion cancelled.");
-        return;
-    }
-    if (tasktodelete.trim() === "") {
-        alert("Please enter a task to delete.");
-        return;
-    }
-    if (!todo.includes(tasktodelete)) {
-        alert("This task does not exist in your todo list.");
-        return;
-    }
-    const indexofitem = todo.indexOf(tasktodelete);
-    todo.splice(indexofitem, 1);
-    alert(`Task "${tasktodelete}" removed.`);
-    console.log("Updated Todolist:", todo);
-}
-
-displayTasks = () => {
-    if (todo.length === 0) {
-        alert("Your todo list is empty.");
-        console.log("Todo list is empty.");
-        return;
-    }
-    let taskList = "Your Todo List:\n";
-    todo.forEach((task, index) => {
-        taskList += `${index + 1}. ${task}\n`;
-    });
-    alert(taskList);
-    console.log("Your Todo list:", todo.toString());
-}
-
-ClearTodo = () =>{
-    if (todo.length === 0) {
-        console.log("Todo list is empty.");
-        alert("Your todo list is already empty.");
-        return;
-    }
-    todo.length = 0; 
-    alert("Your todo list has been cleared.");
-    console.log("Todo list cleared.");
-}
-
-//Excercise 4 Solution
-function startTip(){
-    bill = prompt("Enter your bill amount");
-    if (isNaN(bill) || bill.trim() === "") {
-        console.log("Enter a valid number")
-        alert("Enter a valid number")
-        return
-    }
-    tippercentage = prompt("Enter Tip Percentage (0 - 100%)")
-    if (isNaN(tippercentage) || tippercentage.trim() === "") {
-        console.log("Enter a valid number")
-        alert("Enter a valid number")
-        return
-    }
-    
-    newbill = Number(bill);
-    tip = Number(tippercentage);
-    if (tip > 100){
-        alert("Tip value Exceeded");
-        return
-    }
-
-    tip_amount = (tip * 0.01) * newbill;
-    total_amount = newbill + tip_amount;
-    alert("Tip amount is: " + tip_amount + "\n" + "Your Total amount is: " + total_amount);
-}
-
-// Excercise 5 solution
-function loginSimulation(){
-    credentials = [
-        user1 = {
-            username: "user1",
-            password: "password1"
-        },
-        user2 = {
-            username: "user2",
-            password: "password2"
-        },
-        user3 = {
-            username: "user3",
-            password: "password3"
-        },
-        user4 = {
-            username: "user4",
-            password: "password4"
-        }
-    ]
-
-    console.log("Login info" + credentials);
-        
-    username = prompt("Enter your username:");
-    password = prompt("Enter your password:");
-
-    if (username === null || password === null) {
-        alert("Login cancelled.");
-        return;
-    }
-
-    if (username.trim() === "" || password.trim() === "") {
-        alert("Please enter both username and password.");
-        return;
-    }
-
-    let userFound = false;
-    for (let i = 0; i < credentials.length; i++){
-        if (credentials[i].username === username && credentials[i].password === password) {
-            userFound = true;
-            alert("Access Granted! Welcome " + username + "!");
-            console.log("Access Granted for user: " + username);
-            break;
-        }
-        else{
-            userFound = false;
-            console.log("Access Granted for user: " + username);
-            alert("Login failed! Incorrect username or password.");
-            break;
-        }
-    }
-}
-
-//Excercise 6 Solutions
-function startBudgetTracker(){
-    income = prompt("Enter your monthly income:");
-    if (isNaN(income) || income.trim() === "") {
-        alert("Please enter a valid income amount.");
-        return;
-    }
-
-    items_number = prompt("How many items do you want to add to your budget tracker?");
-    if (isNaN(items_number) || items_number <= 0) {
-        alert("Please enter a valid number of items.");
-        return;
-    }
-
-    for (let i=0; i < items_number; i++){
-        items = prompt(`Enter your Item ${i+1} Price: `);
-        if (isNaN(items) || items.trim() === "") {
-            alert("Please enter a valid item price.");
-            i--; 
-            continue;
-        }
-        if (i === 0) {
-            total = Number(items);
         } else {
-            total += Number(items);
-        }   
+            console.log("Invalid action. Try: add/view/delete/exit");
+            alert("Invalid action. Try: add/view/delete/exit");
+        }
     }
-}
+}``  // --- Section 4: Tip Calculator ---
+        function runCalculator() {
+            alert("Welcome to the Tip Calculator!");
+
+            const billAmountInput = prompt("Enter the bill amount:");
+            if (billAmountInput === null) {
+                alert("Tip calculation cancelled!");
+                return;
+            }
+
+            const billAmount = Number(billAmountInput);
+            if (isNaN(billAmount) || billAmount <= 0) {
+                alert("Please enter a valid bill amount.");
+                return;
+            }
+
+            const tipPercentageInput = prompt("Enter the tip percentage (e.g., 15 for 15%):");
+            if (tipPercentageInput === null) {
+                alert("Tip calculation cancelled!");
+                return;
+            }
+
+            const tipPercentage = Number(tipPercentageInput);
+            if (isNaN(tipPercentage) || tipPercentage < 0) {
+                alert("Please enter a valid tip percentage.");
+                return;
+            }
+
+            const tipAmount = (billAmount * tipPercentage) / 100;
+            const totalAmount = billAmount + tipAmount;
+
+            alert(`Bill Amount: $${billAmount.toFixed(2)}\nTip (${tipPercentage}%): $${tipAmount.toFixed(2)}\nTotal Amount: $${totalAmount.toFixed(2)}`);
+        }
+  // --- Section 5: Login Simulation ---
+        function LoginSimulation() {
+            const users = [
+                { username: "admin", password: "admin123" },
+                { username: "user", password: "password" },
+                { username: "guest", password: "guest123" },
+                { username: "john", password: "john2024" },
+                { username: "mary", password: "mary456" }
+            ];
+
+            alert("Welcome to Login Simulation!\nTry these credentials:\n• admin / admin123\n• user / password\n• guest / guest123");
+
+            const username = prompt("Enter username:");
+            if (username === null) {
+                alert("Login cancelled!");
+                return;
+            }
+
+            const password = prompt("Enter password:");
+            if (password === null) {
+                alert("Login cancelled!");
+                return;
+            }
+
+            const user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
+                alert(`Access Granted! Welcome, ${username}!`);
+            } else {
+                const userExists = users.find(u => u.username === username);
+                if (userExists) {
+                    alert("Access Denied! Incorrect password.");
+                } else {
+                    alert("Access Denied! Username not found.");
+                }
+            }
+        }
+         // --- Section 6: Budget Tracker ---
+        function BudgetTracker() {
+            alert("Welcome to the Budget Tracker!");
+
+            const incomeInput = prompt("Enter your monthly income:");
+            if (incomeInput === null) {
+                alert("Budget tracking cancelled!");
+                return;
+            }
+
+            const income = Number(incomeInput);
+            if (isNaN(income) || income < 0) {
+                alert("Please enter a valid income amount.");
+                return;
+            }
+
+            const expenses = [];
+            let totalExpenses = 0;
+
+            while (true) {
+                const expenseInput = prompt("Enter an expense amount (or click Cancel to finish):");
+                if (expenseInput === null) break;
+
+                const expense = Number(expenseInput);
+                if (isNaN(expense) || expense < 0) {
+                    alert("Please enter a valid expense amount.");
+                    continue;
+                }
+
+                const description = prompt("Enter expense description:");
+                if (description === null || description.trim() === "") {
+                    expenses.push({ amount: expense, description: "No description" });
+                } else {
+                    expenses.push({ amount: expense, description: description.trim() });
+                }
+
+                totalExpenses += expense;
+            }
+
+            const balance = income - totalExpenses;
+            let message = `Income: $${income.toFixed(2)}\nTotal Expenses: $${totalExpenses.toFixed(2)}\nBalance: $${balance.toFixed(2)}\n\n`;
+
+            if (balance > 0) {
+                message += "You're within budget! ";
+            } else if (balance === 0) {
+                message += "You've used exactly your budget!";
+            } else {
+                message += "You are overspending!";
+            }
+
+            alert(message);
+
+            if (expenses.length > 0) {
+                console.log("--- Expense Breakdown ---");
+                expenses.forEach((exp, index) => {
+                    console.log(`${index + 1}. ${exp.description}: $${exp.amount.toFixed(2)}`);
+                });
+            }
+        }
+   // --- Section 7: Multiplication Game ---
+        function MultiplicationGame() {
+            alert("Welcome to the Multiplication Game for Kids!");
+
+            const rounds = 5;
+            let score = 0;
+
+            for (let round = 1; round <= rounds; round++) {
+                const num1 = Math.floor(Math.random() * 10) + 1;
+                const num2 = Math.floor(Math.random() * 10) + 1;
+                const correctAnswer = num1 * num2;
+
+                const userAnswer = prompt(`Round ${round}/${rounds}: What is ${num1} × ${num2}?`);
+
+                if (userAnswer === null) {
+                    alert("Game cancelled!");
+                    return;
+                }
+
+                const answer = Number(userAnswer);
+
+                if (isNaN(answer)) {
+                    alert("Please enter a valid number!");
+                    continue;
+                }
+
+                if (answer === correctAnswer) {
+                    alert("Correct");
+                    score++;
+                } else {
+                    alert(`Incorrect. The correct answer is ${correctAnswer}.`);
+                }
+            }
+
+            let finalMessage = `Game Over!\nYou got ${score} out of ${rounds} questions correct!\n\n`;
+
+            if (score === rounds) {
+                finalMessage += "Perfect score!";
+            } else if (score >= rounds * 0.8) {
+                finalMessage += "Excellent";
+            } else if (score >= rounds * 0.6) {
+                finalMessage += "Good";
+            } else {
+                finalMessage += "Keep practicing";
+            }
+
+            alert(finalMessage);
+        }
